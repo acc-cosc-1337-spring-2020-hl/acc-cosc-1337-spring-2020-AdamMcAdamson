@@ -12,8 +12,6 @@ double gross_pay(double hours, double hourly_rate)
 		total = hourly_rate * hours;
 	}
 
-	int value = (int)(total * 100 + .5);
-	total = (double)value / 100;
 
 	return total;
 }
