@@ -13,7 +13,7 @@ function and display the result. Program runs as long as
 user enters a y or Y.
 */
 int main() 
-{
+{ 
 	string choice;
 	string dna;
 	string repeat;
