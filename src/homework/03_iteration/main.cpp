@@ -23,6 +23,7 @@ int main()
 		cin >> choice;
 
 		if (choice != "1" && choice != "2") {
+			repeat = "y";
 			continue;
 		}
 
