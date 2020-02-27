@@ -32,8 +32,6 @@ int main()
 			continue;
 		}
 
-		
-
 		if (choice == "1") 
 		{
 			cout << "Max Value:\t" << get_max_from_vector(example);
