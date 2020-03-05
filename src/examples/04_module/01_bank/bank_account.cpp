@@ -45,3 +45,27 @@ void BankAccount::open(int amount)
 		throw InvalidAmount("\nInsufficient Funds to open account\n");
 	}
 }
+
+double BankAccount::rate = init_rate();
+
+void display_balance(const BankAccount & b)
+{
+	std::cout << "\nBalance is: " << b.get_balance() << "\n";
+}
+
+std::ostream & operator<<(std::ostream & out, const BankAccount & b)
+{
+	out << "\nBalance is: " << b.get_balance() << "\n";
+	
+	return out;
+}
+
+std::istream & operator>>(std::istream & in, BankAccount & b)
+{
+	int amount;
+	std::cout << "Enter amount to deposit: ";
+	in >> amount;
+	b.deposit(amount);
+	
+	return in;
+}

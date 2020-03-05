@@ -66,3 +66,10 @@ TEST_CASE("Test BankAccount open account with less than min balance")
 	BankAccount account;
 	REQUIRE_THROWS_AS(account.open(10), InvalidAmount);
 }
+
+TEST_CASE("Test BankAccount get rate")
+{
+	BankAccount account;
+
+	REQUIRE(account.get_rate() == 0.025);
+}

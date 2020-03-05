@@ -16,3 +16,9 @@ int rectangle::get_area()
 {
 	return area;
 }
+
+std::ostream & operator<<(std::ostream & out, const rectangle & rect)
+{
+	out << "The area is: " << rect.area;
+	return out;
+}
