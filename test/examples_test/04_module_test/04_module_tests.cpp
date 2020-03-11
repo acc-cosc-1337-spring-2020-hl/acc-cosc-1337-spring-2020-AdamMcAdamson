@@ -15,7 +15,7 @@ TEST_CASE("Test BankAccount get_balance")
 
 TEST_CASE("Test CheckingAccount get_balance")
 {
-	CheckingAccount account(50);
+	BankAccount account(50);
 
 	REQUIRE(account.get_balance() == 50);
 }
