@@ -40,6 +40,8 @@ void BankAccount::open(int amount)
 	{
 		balance = amount;
 	}
+
+
 	else
 	{
 		throw InvalidAmount("\nInsufficient Funds to open account\n");

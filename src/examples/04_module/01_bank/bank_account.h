@@ -36,5 +36,4 @@ private:
 	std::string message;
 };
 
-#endif
-
+#endif //!BANK_ACCOUNT_H
