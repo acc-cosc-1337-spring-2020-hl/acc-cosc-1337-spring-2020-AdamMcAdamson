@@ -1,10 +1,11 @@
 //cpp
 #include "tic_tac_toe.h"
 
-
 // TicTacToe Class
 bool TicTacToe::game_over()
 {
+
+
 	return check_board_full();
 }
 
@@ -86,6 +87,11 @@ void TicTacToe::set_next_player()
 	}
 }
 
+void TicTacToe::set_winner()
+{
+	winner = player;
+}
+
 void TicTacToe::clear_board()
 {
 	for (auto p : pegs)
@@ -99,12 +105,48 @@ string TicTacToe::get_player() const
 	return player;
 }
 
+string TicTacToe::get_winner()
+{
+	return winner;
+}
+
+bool TicTacToe::check_column_win()
+{
+	for (int i = 0; i < 3; i++) {
+		if (pegs[i] == pegs[i + 3] && pegs[i + 3] == pegs[i + 6]) {
+			return true;
+		}
+	}
+	return false;
+}
+
+bool TicTacToe::check_row_win()
+{
+	for (int i = 0; i < 3; i++) {
+		if (pegs[i*3] == pegs[i*3 + 1] && pegs[i*3 + 1] == pegs[i*3 + 2]) {
+			return true;
+		}
+	}
+	return false;
+}
+
+bool TicTacToe::check_diagonal_win()
+{
+	if (pegs[0] == pegs[4] && pegs[4] == pegs[8])
+	{
+		return true;
+	}
+	else if (pegs[2] == pegs[4] && pegs[4] == pegs[6]) {
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 // Error Class
 string Error::get_message()
 {
 	return message;
 }
-
-
-
-

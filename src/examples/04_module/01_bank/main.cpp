@@ -1,52 +1,26 @@
 #include "checking_account.h"
 #include "savings_account.h"
+#include "atm.h"
 #include <iostream>
 #include <vector>
+#include <memory>
 
-using std::cout; using std::cin; using std::vector; using std::reference_wrapper;
+using std::cout; using std::cin; using std::vector; using std::unique_ptr; using std::make_unique;
 
 int main()
 {
+	unique_ptr<BankAccount> s = make_unique<SavingsAccount>(100);
+	unique_ptr<BankAccount> c = make_unique<CheckingAccount>(100);
 
-	SavingsAccount s(100);
-	CheckingAccount c(100);
-	
-	vector<reference_wrapper<BankAccount>> accounts {s, c};
+	vector<unique_ptr<BankAccount>> acts;
+	acts.push_back(std::move(s));
+	acts.push_back(std::move(c));
 
-	for (auto acc_ref : accounts)
-	{
-		cout << acc_ref.get().get_balance() << "\n";
-	}
+	Customer cust(acts);
+	ATM atm(cust);
 
-	/*
-	CheckingAccount checking(50);
-	cout << checking.get_balance();
-
-	CheckingAccount a(50);
-	display_balance(a);
-	cin >> a;
-	cout << a;
-	
-	vector<BankAccount> accounts{ BankAccount(100), BankAccount(200), BankAccount(300) };
-	
-	for (auto act : accounts)
-	{
-		cout << act.get_balance() << "\n";
-	}
-
-	BankAccount account(500);
-	int balance = account.get_balance();
-	cout << "Balance: " << balance;
-
-	try
-	{
-		account.deposit(-10);
-	}
-	catch (InvalidAmount e)
-	{
-		cout << e.get_message();
-	}
-	*/
+	//some interaction..w customer
+	cout << atm;
 
 	return 0;
 }
