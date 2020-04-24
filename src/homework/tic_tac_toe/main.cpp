@@ -5,28 +5,22 @@
 
 using std::cout;
 using std::cin;
+using std::vector;
+using std::unique_ptr;
+using std::make_unique;
 
 int main() 
 {
+
 	int x = 0;
 	int o = 0;
 	int tie = 0;
-	//somehow this is also giving an error
-	//std::vector<std::reference_wrapper<TicTacToe>> games;
+	vector<unique_ptr<TicTacToe>> games;
 	TicTacToeManager manager = TicTacToeManager();
+	unique_ptr<TicTacToe> game;
 	int gameType = 0;
 	string player;
 	string choice = "Y";
-
-	/* 
-	
-	Cannot Figure out main, but my test cases work.
-
-	pushed_back games have pegs.size() == 0 which should not be the case. 
-
-	I suspect I am doing something wrong with handling a vector<reference_wrapper<Type>> vs. a vector<Type>
-	--------------------------------
-
 
 	do {
 		cout << "Would you like to play 3 or 4? ";
@@ -34,13 +28,13 @@ int main()
 		
 		if (gameType == 3)
 		{
-			TicTacToe game = TicTacToe3();
-			games.push_back(game);
+			game = make_unique<TicTacToe3>();
+			games.push_back(std::move(game));
 		}
 		else if (gameType == 4)
 		{
-			TicTacToe game = TicTacToe4();
-			games.push_back(game);
+			game = make_unique<TicTacToe4>();
+			games.push_back(std::move(game));
 		}
 		else
 		{
@@ -56,21 +50,21 @@ int main()
 			continue;
 		}
 		
-		games[games.size()-1].get().start_game(player);
+		games[games.size()-1]->start_game(player);
 
-		while (!games[games.size()-1].get().game_over())
+		while (!games[games.size()-1]->game_over())
 		{
 
-			cin >> games[games.size() - 1].get();
-			cout << games[games.size() - 1].get();
+			cin >> *games[games.size() - 1];
+			cout << *games[games.size() - 1];
 			cout << "\n";
 		}
 
-		if (games[games.size() - 1].get().get_winner() == "X")
+		if (games[games.size() - 1]->get_winner() == "X")
 		{
 			x++;
 		}
-		else if (games[games.size() - 1].get().get_winner() == "O")
+		else if (games[games.size() - 1]->get_winner() == "O")
 		{
 			o++;
 		}
@@ -81,7 +75,7 @@ int main()
 
 		cout << "X:\t" << x << "\nO:\t" << o << "\nTies:\t" << tie << "\n";
 
-		manager.save_game(games[games.size() - 1].get());
+		manager.save_game(std::move(games[games.size() - 1]));
 		
 		cout << "\nPlay again? (Y: yes, N: no): ";
 		cin >> choice;
@@ -89,6 +83,6 @@ int main()
 	} while (choice == "Y");
 
 	cout << manager;
-	*/
+	
 	return 0;
 }

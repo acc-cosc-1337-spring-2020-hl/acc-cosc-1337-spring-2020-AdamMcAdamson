@@ -16,6 +16,8 @@ int main()
 	acts.push_back(std::move(s));
 	acts.push_back(std::move(c));
 
+	
+
 	Customer cust(acts);
 	ATM atm(cust);
 

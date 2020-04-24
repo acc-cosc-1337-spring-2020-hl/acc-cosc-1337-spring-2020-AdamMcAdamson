@@ -7,7 +7,6 @@ bool TicTacToe::game_over()
 {
 	if (check_column_win() || check_row_win() || check_diagonal_win())
 	{
-
 		set_winner();
 		return true;
 	}
@@ -107,21 +106,6 @@ string TicTacToe::get_player() const
 string TicTacToe::get_winner()
 {
 	return winner;
-}
-
-bool TicTacToe::check_column_win()
-{
-	return false;
-}
-
-bool TicTacToe::check_row_win()
-{
-	return false;
-}
-
-bool TicTacToe::check_diagonal_win()
-{
-	return false;
 }
 
 
