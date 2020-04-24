@@ -54,6 +54,8 @@ int main()
 			cout << "Player must be 'X' or 'O'\n";
 			continue;
 		}
+		
+		games[games.size()-1].get().start_game(player);
 
 		while (!games[games.size()-1].get().game_over())
 		{
@@ -62,6 +64,7 @@ int main()
 			cout << games[games.size() - 1].get();
 			cout << "\n";
 		}
+
 		if (games[games.size() - 1].get().get_winner() == "X")
 		{
 			x++;
