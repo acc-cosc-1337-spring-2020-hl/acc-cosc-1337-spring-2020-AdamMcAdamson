@@ -87,14 +87,7 @@ void TicTacToe::set_next_player()
 
 void TicTacToe::set_winner()
 {
-	if (player == "X")
-	{
-		winner = "O";
-	}
-	else
-	{
-		winner = "X";
-	}
+	winner = player;
 }
 
 void TicTacToe::clear_board()
