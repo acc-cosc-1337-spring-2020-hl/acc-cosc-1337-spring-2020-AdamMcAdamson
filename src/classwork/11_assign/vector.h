@@ -1,4 +1,9 @@
 //
+/* 
+
+-- Having issues with Travis CI and size_t, commented temporarily
+
+
 #ifndef MY_VECTOR_H
 #define MY VECTOR_H
 
@@ -20,3 +25,4 @@ private:
 void use_vector();
 #endif //!MY_VECTOR_H
 
+*/
