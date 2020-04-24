@@ -1,4 +1,6 @@
 #include "tic_tac_toe.h"
+#include "tic_tac_toe_3.h"
+#include "tic_tac_toe_4.h"
 #include "tic_tac_toe_manager.h"
 
 using std::cout;
@@ -9,13 +11,30 @@ int main()
 	int x = 0;
 	int o = 0;
 	int tie = 0;
-	TicTacToe game = TicTacToe();
+	std::vector<std::reference_wrapper<TicTacToe>> games;
 	TicTacToeManager manager = TicTacToeManager();
+	int gameType = 0;
 	string player;
 	string choice = "Y";
 
 	do {
-
+		cout << "Would you like to play 3 or 4? ";
+		cin >> gameType;
+		if (gameType == 3)
+		{
+			TicTacToe game = TicTacToe3();
+			games.push_back(game);
+		}
+		else if (gameType == 4)
+		{
+			TicTacToe game = TicTacToe4();
+			games.push_back(game);
+		}
+		else
+		{
+			cout << "Game Type must be 3 or 4.\n";
+			continue;
+		}
 		cout << "Enter Starting Player: ";
 		cin >> player;
 		if (!(player == "X" || player == "O"))
@@ -24,19 +43,18 @@ int main()
 			continue;
 		}
 
-		game.start_game(player);
-
-		while (!game.game_over())
+		while (!games[0].get().game_over())
 		{
-			cin >> game;
-			cout << game;
+			cout << "IHIHIHIHI";
+			cin >> games[games.size() - 1].get();
+			cout << games[games.size() - 1].get();
 			cout << "\n";
 		}
-		if (game.get_winner() == "X")
+		if (games[games.size() - 1].get().get_winner() == "X")
 		{
 			x++;
 		}
-		else if (game.get_winner() == "O")
+		else if (games[games.size() - 1].get().get_winner() == "O")
 		{
 			o++;
 		}
@@ -47,7 +65,7 @@ int main()
 
 		cout << "X:\t" << x << "\nO:\t" << o << "\nTies:\t" << tie << "\n";
 
-		manager.save_game(game);
+		manager.save_game(games[games.size() - 1].get());
 		
 		cout << "\nPlay again? (Y: yes, N: no): ";
 		cin >> choice;

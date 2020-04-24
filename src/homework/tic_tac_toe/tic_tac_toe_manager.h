@@ -10,13 +10,11 @@ public:
 	friend std::ostream& operator<<(std::ostream& out, const TicTacToeManager& manager);
 private:
 	void update_winner_count(std::string winner);
-	std::vector<TicTacToe> games;
+	std::vector<std::reference_wrapper<TicTacToe>> games;
 	int o_win{ 0 };
 	int x_win{ 0 };
 	int tie{ 0 };
 };
-
-
 
 
 #endif //!TIC_TAC_TOE_MANAGER_H

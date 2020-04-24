@@ -2,10 +2,12 @@
 #include "tic_tac_toe.h"
 
 // TicTacToe Class
+
 bool TicTacToe::game_over()
 {
 	if (check_column_win() || check_row_win() || check_diagonal_win())
 	{
+
 		set_winner();
 		return true;
 	}
@@ -30,15 +32,14 @@ void TicTacToe::start_game(string first_player)
 	{
 		player = first_player;
 	}
-
 	clear_board();
 }
 
 void TicTacToe::mark_board(int position)
 {
-	if (!(position >= 1 && position <= 9))
+	if (!(position >= 1 && position <= pegs.size()))
 	{
-		throw Error("Position must be 1 to 9.");
+		throw Error("Position must be 1 to " + pegs.size());
 	}
 	else if (pegs[position - 1] != " ")
 	{
@@ -66,6 +67,9 @@ bool TicTacToe::check_board_full()
 			return false;
 		}
 	}
+	std::cout << "\nCheck_board_full failed\n Peg size: ";
+	std::cout << pegs.size();
+	std::cout << "\n________\n";
 	return true;
 }
 
@@ -92,7 +96,7 @@ void TicTacToe::set_winner()
 
 void TicTacToe::clear_board()
 {
-	for (auto&  p : pegs)
+	for (auto & p : pegs)
 	{
 		p = " ";
 	}
@@ -110,49 +114,36 @@ string TicTacToe::get_winner()
 
 bool TicTacToe::check_column_win()
 {
-	for (int i = 0; i < 3; i++) {
-		if (pegs[i] == player  && pegs[i + 3] == player && pegs[i + 6] == player) {
-			return true;
-		}
-	}
 	return false;
 }
 
 bool TicTacToe::check_row_win()
 {
-	for (int i = 0; i < 3; i++) {
-		if (pegs[i*3] == player && pegs[i*3 + 1] == player && pegs[i*3 + 2] == player) {
-			return true;
-		}
-	}
 	return false;
 }
 
 bool TicTacToe::check_diagonal_win()
 {
-	if (pegs[0] == player && pegs[4] == player && pegs[8] == player)
-	{
-		return true;
-	}
-	else if (pegs[2] == player && pegs[4] == player && pegs[6] == player) 
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return false;
 }
+
 
 std::ostream & operator<<(std::ostream & out, const TicTacToe & game)
 {
 	out << " ";
-	for (int i = 0; i < 9; i++) {
-		if (i % 3 != 0) {
+	for (int i = 0; i < game.pegs.size(); i++) {
+		if (i % ((int)sqrt(game.pegs.size())) != 0) {
 			out << " | ";
 		}
-		else if (i / 3 > 0) {
-			out << "\n-----------\n ";
+		else if (i / ((int)sqrt(game.pegs.size())) > 0) {
+			if (game.pegs.size() == 9)
+			{
+				out << "\n-----------\n ";
+			}
+			else
+			{
+				out << "\n---------------\n ";
+			}
 		}
 		out << game.pegs[i];
 	}
