@@ -4,9 +4,20 @@
 // TicTacToe Class
 bool TicTacToe::game_over()
 {
-
-
-	return check_board_full();
+	if (check_column_win() || check_row_win() || check_diagonal_win())
+	{
+		set_winner();
+		return true;
+	}
+	else if(check_board_full())
+	{
+		winner = "C";
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void TicTacToe::start_game(string first_player)
@@ -25,7 +36,7 @@ void TicTacToe::start_game(string first_player)
 
 void TicTacToe::mark_board(int position)
 {
-	if (!(position >= 1 || position <= 9))
+	if (!(position >= 1 && position <= 9))
 	{
 		throw Error("Position must be 1 to 9.");
 	}
@@ -89,7 +100,14 @@ void TicTacToe::set_next_player()
 
 void TicTacToe::set_winner()
 {
-	winner = player;
+	if (player == "X")
+	{
+		winner = "O";
+	}
+	else
+	{
+		winner = "X";
+	}
 }
 
 void TicTacToe::clear_board()
@@ -112,8 +130,16 @@ string TicTacToe::get_winner()
 
 bool TicTacToe::check_column_win()
 {
+	string test;
+	if (player == "X") {
+		test = "O";
+	}
+	else
+	{
+		test = "X";
+	}
 	for (int i = 0; i < 3; i++) {
-		if (pegs[i] == pegs[i + 3] && pegs[i + 3] == pegs[i + 6]) {
+		if (pegs[i] == test  && pegs[i + 3] ==  test && pegs[i + 6] == test) {
 			return true;
 		}
 	}
@@ -122,8 +148,16 @@ bool TicTacToe::check_column_win()
 
 bool TicTacToe::check_row_win()
 {
+	string test;
+	if (player == "X") {
+		test = "O";
+	}
+	else
+	{
+		test = "X";
+	}
 	for (int i = 0; i < 3; i++) {
-		if (pegs[i*3] == pegs[i*3 + 1] && pegs[i*3 + 1] == pegs[i*3 + 2]) {
+		if (pegs[i*3] == test && pegs[i*3 + 1] == test && pegs[i*3 + 2] == test) {
 			return true;
 		}
 	}
@@ -132,11 +166,19 @@ bool TicTacToe::check_row_win()
 
 bool TicTacToe::check_diagonal_win()
 {
-	if (pegs[0] == pegs[4] && pegs[4] == pegs[8])
+	string test;
+	if (player == "X") {
+		test = "O";
+	}
+	else
+	{
+		test = "X";
+	}
+	if (pegs[0] == test && pegs[4] == test && pegs[8] == test)
 	{
 		return true;
 	}
-	else if (pegs[2] == pegs[4] && pegs[4] == pegs[6]) {
+	else if (pegs[2] == test && pegs[4] == test && pegs[6] == test) {
 		return true;
 	}
 	else
