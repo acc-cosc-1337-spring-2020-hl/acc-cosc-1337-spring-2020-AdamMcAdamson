@@ -67,9 +67,6 @@ bool TicTacToe::check_board_full()
 			return false;
 		}
 	}
-	std::cout << "\nCheck_board_full failed\n Peg size: ";
-	std::cout << pegs.size();
-	std::cout << "\n________\n";
 	return true;
 }
 

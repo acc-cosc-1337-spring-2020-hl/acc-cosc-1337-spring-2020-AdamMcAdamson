@@ -17,9 +17,20 @@ int main()
 	string player;
 	string choice = "Y";
 
+	/* 
+	
+	Cannot Figure out main, but my test cases work.
+
+	pushed_back games have pegs.size() == 0 which should not be the case. 
+
+	I suspect I am doing something wrong with handling a vector<reference_wrapper<Type>> vs. a vector<Type>
+	--------------------------------
+
+
 	do {
 		cout << "Would you like to play 3 or 4? ";
 		cin >> gameType;
+		
 		if (gameType == 3)
 		{
 			TicTacToe game = TicTacToe3();
@@ -35,6 +46,7 @@ int main()
 			cout << "Game Type must be 3 or 4.\n";
 			continue;
 		}
+		
 		cout << "Enter Starting Player: ";
 		cin >> player;
 		if (!(player == "X" || player == "O"))
@@ -43,9 +55,9 @@ int main()
 			continue;
 		}
 
-		while (!games[0].get().game_over())
+		while (!games[games.size()-1].get().game_over())
 		{
-			cout << "IHIHIHIHI";
+
 			cin >> games[games.size() - 1].get();
 			cout << games[games.size() - 1].get();
 			cout << "\n";
@@ -73,5 +85,6 @@ int main()
 	} while (choice == "Y");
 
 	cout << manager;
+	*/
 	return 0;
 }
