@@ -11,7 +11,8 @@ int main()
 	int x = 0;
 	int o = 0;
 	int tie = 0;
-	std::vector<std::reference_wrapper<TicTacToe>> games;
+	//somehow this is also giving an error
+	//std::vector<std::reference_wrapper<TicTacToe>> games;
 	TicTacToeManager manager = TicTacToeManager();
 	int gameType = 0;
 	string player;
