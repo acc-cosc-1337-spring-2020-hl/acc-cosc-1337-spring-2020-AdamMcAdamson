@@ -51,23 +51,10 @@ void TicTacToe::mark_board(int position)
 	else
 	{
 		pegs[position - 1] = player;
-		set_next_player();
-	}
-}
-
-void TicTacToe::display_board() const
-{
-	string out = " ";
-	for (int i = 0; i < 9; i++) {
-		if (i % 3 != 0) {
-			out += " | ";
-		} 
-		else if (i / 3 > 0) {
-			out += "\n-----------\n ";
+		if (!game_over()) {
+			set_next_player();
 		}
-		out += pegs[i];
 	}
-	std::cout << out;
 }
 
 bool TicTacToe::check_board_full()
@@ -112,7 +99,7 @@ void TicTacToe::set_winner()
 
 void TicTacToe::clear_board()
 {
-	for (auto p : pegs)
+	for (auto&  p : pegs)
 	{
 		p = " ";
 	}
@@ -130,16 +117,8 @@ string TicTacToe::get_winner()
 
 bool TicTacToe::check_column_win()
 {
-	string test;
-	if (player == "X") {
-		test = "O";
-	}
-	else
-	{
-		test = "X";
-	}
 	for (int i = 0; i < 3; i++) {
-		if (pegs[i] == test  && pegs[i + 3] ==  test && pegs[i + 6] == test) {
+		if (pegs[i] == player  && pegs[i + 3] == player && pegs[i + 6] == player) {
 			return true;
 		}
 	}
@@ -148,16 +127,8 @@ bool TicTacToe::check_column_win()
 
 bool TicTacToe::check_row_win()
 {
-	string test;
-	if (player == "X") {
-		test = "O";
-	}
-	else
-	{
-		test = "X";
-	}
 	for (int i = 0; i < 3; i++) {
-		if (pegs[i*3] == test && pegs[i*3 + 1] == test && pegs[i*3 + 2] == test) {
+		if (pegs[i*3] == player && pegs[i*3 + 1] == player && pegs[i*3 + 2] == player) {
 			return true;
 		}
 	}
@@ -166,25 +137,47 @@ bool TicTacToe::check_row_win()
 
 bool TicTacToe::check_diagonal_win()
 {
-	string test;
-	if (player == "X") {
-		test = "O";
-	}
-	else
-	{
-		test = "X";
-	}
-	if (pegs[0] == test && pegs[4] == test && pegs[8] == test)
+	if (pegs[0] == player && pegs[4] == player && pegs[8] == player)
 	{
 		return true;
 	}
-	else if (pegs[2] == test && pegs[4] == test && pegs[6] == test) {
+	else if (pegs[2] == player && pegs[4] == player && pegs[6] == player) 
+	{
 		return true;
 	}
 	else
 	{
 		return false;
 	}
+}
+
+std::ostream & operator<<(std::ostream & out, const TicTacToe & game)
+{
+	out << " ";
+	for (int i = 0; i < 9; i++) {
+		if (i % 3 != 0) {
+			out << " | ";
+		}
+		else if (i / 3 > 0) {
+			out << "\n-----------\n ";
+		}
+		out << game.pegs[i];
+	}
+	return out;
+}
+
+std::istream & operator>>(std::istream & in, TicTacToe & game)
+{
+	int position;
+
+	std::cout << "\nEnter position (1-9) player " << game.get_player() << ": ";
+	
+	in >> position;
+
+	std::cout << "\n";
+	game.mark_board(position);
+	
+	return in;
 }
 
 // Error Class

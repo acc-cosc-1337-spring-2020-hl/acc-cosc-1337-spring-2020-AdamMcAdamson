@@ -13,9 +13,10 @@ public:
 	bool game_over();
 	void start_game(string first_player);
 	void mark_board(int position);
-	void display_board() const;
 	string get_player() const;
 	string get_winner();
+	friend std::ostream& operator<<(std::ostream& out, const TicTacToe& game);
+	friend std::istream& operator>>(std::istream& in, TicTacToe& game);
 private:
 	void set_next_player();
 	bool check_column_win();
