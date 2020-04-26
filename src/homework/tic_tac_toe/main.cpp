@@ -15,7 +15,6 @@ int main()
 	int x = 0;
 	int o = 0;
 	int tie = 0;
-	vector<unique_ptr<TicTacToe>> games;
 	TicTacToeManager manager = TicTacToeManager();
 	unique_ptr<TicTacToe> game;
 	int gameType = 0;
@@ -29,12 +28,10 @@ int main()
 		if (gameType == 3)
 		{
 			game = make_unique<TicTacToe3>();
-			games.push_back(std::move(game));
 		}
 		else if (gameType == 4)
 		{
 			game = make_unique<TicTacToe4>();
-			games.push_back(std::move(game));
 		}
 		else
 		{
@@ -50,21 +47,21 @@ int main()
 			continue;
 		}
 		
-		games[games.size()-1]->start_game(player);
+		game->start_game(player);
 
-		while (!games[games.size()-1]->game_over())
+		while (!game->game_over())
 		{
 
-			cin >> *games[games.size() - 1];
-			cout << *games[games.size() - 1];
+			cin >> *game;
+			cout << *game;
 			cout << "\n";
 		}
 
-		if (games[games.size() - 1]->get_winner() == "X")
+		if (game->get_winner() == "X")
 		{
 			x++;
 		}
-		else if (games[games.size() - 1]->get_winner() == "O")
+		else if (game->get_winner() == "O")
 		{
 			o++;
 		}
@@ -75,7 +72,7 @@ int main()
 
 		cout << "X:\t" << x << "\nO:\t" << o << "\nTies:\t" << tie << "\n";
 
-		manager.save_game(std::move(games[games.size() - 1]));
+		manager.save_game(game);
 		
 		cout << "\nPlay again? (Y: yes, N: no): ";
 		cin >> choice;
