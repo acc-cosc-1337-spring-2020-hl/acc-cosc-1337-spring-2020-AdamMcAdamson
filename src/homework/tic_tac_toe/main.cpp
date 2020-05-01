@@ -15,7 +15,8 @@ int main()
 	int x = 0;
 	int o = 0;
 	int tie = 0;
-	TicTacToeManager manager = TicTacToeManager();
+	TicTacToeData data;
+	TicTacToeManager manager = TicTacToeManager(data);
 	unique_ptr<TicTacToe> game;
 	int gameType = 0;
 	string player;

@@ -108,6 +108,11 @@ string TicTacToe::get_winner()
 	return winner;
 }
 
+vector<string> TicTacToe::get_pegs() const
+{
+	return pegs;
+}
+
 
 std::ostream & operator<<(std::ostream & out, const TicTacToe & game)
 {
@@ -135,7 +140,7 @@ std::istream & operator>>(std::istream & in, TicTacToe & game)
 {
 	int position;
 
-	std::cout << "\nEnter position (1-9) player " << game.get_player() << ": ";
+	std::cout << "\nEnter position (1-"<< game.pegs.size()<< ") player " << game.get_player() << ": ";
 	
 	in >> position;
 
